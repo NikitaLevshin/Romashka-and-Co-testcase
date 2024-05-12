@@ -2,7 +2,6 @@ package com.romashkaco.testcase.product.controller;
 
 import com.romashkaco.testcase.product.dto.ProductDto;
 import com.romashkaco.testcase.product.service.ProductService;
-import com.romashkaco.testcase.product.service.ProductServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

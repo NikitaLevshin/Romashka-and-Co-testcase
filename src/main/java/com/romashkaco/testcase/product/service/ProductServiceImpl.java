@@ -46,11 +46,14 @@ public class ProductServiceImpl implements ProductService {
         Product product = ProductMapper.fromProductDto(getById(id));
         if (productDto.getName() != null) {
             product.setName(productDto.getName());
-        } if (productDto.getDescription() != null) {
+        }
+        if (productDto.getDescription() != null) {
             product.setDescription(productDto.getDescription());
-        } if (productDto.getPrice() != 0) {
+        }
+        if (productDto.getPrice() != 0) {
             product.setPrice(productDto.getPrice());
-        } if (productDto.getIsOnStock() != null) {
+        }
+        if (productDto.getIsOnStock() != null) {
             product.setOnStock((productDto.getIsOnStock()));
         }
         productRepository.findById(id).orElseThrow(() -> new NotFoundException("Товар с этим id не найден"));
