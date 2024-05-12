@@ -39,6 +39,11 @@ public class InMemoryProductStorage implements ProductStorage {
     @Override
     public Product create(Product product) {
         log.info("Создаем новый товар");
+        if (product.getPrice() == null) {
+            product.setPrice(0.0);
+        } if (product.getIsOnStock() == null) {
+            product.setIsOnStock(false);
+        }
         product.setId(id);
         id++;
         products.put(product.getId(), product);
@@ -47,21 +52,30 @@ public class InMemoryProductStorage implements ProductStorage {
 
     @Override
     public Product upgrade(int id, Product product) {
-        log.info("Обновляем пользователя с id {}", id);
+        log.info("Обновляем товар с id {}", id);
         if (!products.containsKey(id)) {
             throw new NotFoundException("Товар не найден");
         } else {
-        products.get(id);
-        product.setId(id);
-        validate(product);
-        products.replace(id, product);
-        return product;
+        Product productOnUpdate = products.get(id);
+        if (product.getName() != null) {
+            productOnUpdate.setName(product.getName());
+        } if (product.getDescription() != null) {
+            productOnUpdate.setDescription(product.getDescription());
+        } if (product.getPrice() != null) {
+            productOnUpdate.setPrice(product.getPrice());
+        } if (product.getIsOnStock() != null) {
+            productOnUpdate.setIsOnStock(product.getIsOnStock());
+        }
+        validate(productOnUpdate);
+
+        products.replace(id, productOnUpdate);
+        return productOnUpdate;
         }
     }
 
     @Override
     public void delete(int id) {
-        log.info("Удаляем пользователя с id {}", id);
+        log.info("Удаляем товар с id {}", id);
         if (!products.containsKey(id)) {
             throw new NotFoundException("Товар не найден");
         } else {

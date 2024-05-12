@@ -21,8 +21,8 @@ public class Product {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String description;
     @Min(value = 0, message = "Цена не может быть отрицательной")
-    private double price;
-    private boolean isOnStock;
+    private Double price;
+    private Boolean isOnStock;
 
 
     public Product(String name, String description, double price, boolean isOnStock) {
