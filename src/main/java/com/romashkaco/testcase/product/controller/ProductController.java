@@ -1,7 +1,8 @@
-package com.romashkaco.testcase.controller;
+package com.romashkaco.testcase.product.controller;
 
-import com.romashkaco.testcase.model.Product;
-import com.romashkaco.testcase.service.ProductService;
+import com.romashkaco.testcase.product.dto.ProductDto;
+import com.romashkaco.testcase.product.service.ProductService;
+import com.romashkaco.testcase.product.service.ProductServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,26 +19,26 @@ public class ProductController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Collection<Product> getAll() {
+    public Collection<ProductDto> getAll() {
         return productService.getAll();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Product getById(@PathVariable(name = "id") int id) {
+    public ProductDto getById(@PathVariable(name = "id") int id) {
         return productService.getById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Product create(@Valid @RequestBody Product product) {
-        return productService.create(product);
+    public ProductDto create(@Valid @RequestBody ProductDto productDto) {
+        return productService.create(productDto);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Product upgrade(@PathVariable(name = "id") int id, @RequestBody Product product) {
-        return productService.upgrade(id, product);
+    public ProductDto upgrade(@PathVariable(name = "id") int id, @RequestBody ProductDto productDto) {
+        return productService.upgrade(id, productDto);
     }
 
     @DeleteMapping("/{id}")

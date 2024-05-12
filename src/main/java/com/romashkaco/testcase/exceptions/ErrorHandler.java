@@ -1,4 +1,4 @@
-package com.romashkaco.testcase.exception;
+package com.romashkaco.testcase.exceptions;
 
 import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
