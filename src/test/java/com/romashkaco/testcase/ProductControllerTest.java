@@ -67,8 +67,7 @@ public class ProductControllerTest {
 
     @Test
     void getAllProductsTest() throws Exception {
-        when(productService.getAll("Молоток", 123.12, null,
-                false, ProductSort.PRICEASC, 0))
+        when(productService.getAll(null, null, null, null, null, 100))
                 .thenReturn(List.of(productDto));
 
         mvc.perform(get("/product"))
