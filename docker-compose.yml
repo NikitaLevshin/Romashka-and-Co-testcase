@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  romashka-db:
+    image: postgres:14-alpine
+    container_name: romashka_db_container
+    ports:
+      - "6541:5432"
+    environment:
+      - POSTGRES_DB=romashkaco
+      - POSTGRES_USER=romashka
+      - POSTGRES_PASSWORD=iamflower
+
+  romashka-app:
+    build: .
+    image: romashka_image
+    container_name: romashka_container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - romashka-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://romashka-db:5432/romashkaco
+      - DB_NAME=romashkaco
+      - POSTGRES_USER=romashka
+      - POSTGRES_PASSWORD=iamflower
+      - DB_HOST=127.0.0.1
+      - DB_PORT=5432
