@@ -1,6 +1,7 @@
 package com.romashkaco.testcase.product.controller;
 
 import com.romashkaco.testcase.product.dto.ProductDto;
+import com.romashkaco.testcase.product.model.ProductSort;
 import com.romashkaco.testcase.product.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,13 @@ public class ProductController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Collection<ProductDto> getAll() {
-        return productService.getAll();
+    public Collection<ProductDto> getAll(@RequestParam(required = false) String name,
+                                         @RequestParam(required = false) Double priceMore,
+                                         @RequestParam(required = false) Double priceLess,
+                                         @RequestParam(required = false) Boolean isOnStock,
+                                         @RequestParam(required = false) ProductSort sort,
+                                         @RequestParam(defaultValue = "100") Integer size) {
+        return productService.getAll(name, priceMore, priceLess, isOnStock, sort, size);
     }
 
     @GetMapping("/{id}")

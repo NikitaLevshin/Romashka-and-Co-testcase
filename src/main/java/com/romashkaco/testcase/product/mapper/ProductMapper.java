@@ -4,6 +4,9 @@ import com.romashkaco.testcase.product.dto.ProductDto;
 import com.romashkaco.testcase.product.model.Product;
 import lombok.experimental.UtilityClass;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @UtilityClass
 public class ProductMapper {
 
@@ -12,7 +15,8 @@ public class ProductMapper {
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),
-                productDto.getIsOnStock() != null);
+                productDto.getIsOnStock() != null && productDto.getIsOnStock()
+        );
     }
 
     public static ProductDto toProductDto(Product product) {
@@ -21,5 +25,11 @@ public class ProductMapper {
                 product.getDescription(),
                 product.getPrice(),
                 product.isOnStock());
+    }
+
+    public static List<ProductDto> toProductDtoList(List<Product> productList) {
+        return productList.stream()
+                .map(ProductMapper::toProductDto)
+                .collect(Collectors.toList());
     }
 }

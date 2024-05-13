@@ -3,6 +3,7 @@ package com.romashkaco.testcase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.romashkaco.testcase.product.controller.ProductController;
 import com.romashkaco.testcase.product.dto.ProductDto;
+import com.romashkaco.testcase.product.model.ProductSort;
 import com.romashkaco.testcase.product.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,7 +67,8 @@ public class ProductControllerTest {
 
     @Test
     void getAllProductsTest() throws Exception {
-        when(productService.getAll())
+        when(productService.getAll("Молоток", 123.12, null,
+                false, ProductSort.PRICEASC, 0))
                 .thenReturn(List.of(productDto));
 
         mvc.perform(get("/product"))
