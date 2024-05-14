@@ -22,7 +22,7 @@ java -jar target/testcase-0.0.1-SNAPSHOT.jar
 ## API Reference
 #### Получение всех товаров
 ```
-GET /product/
+GET /product
 ```
 #### Получение товара по его id
 ```
