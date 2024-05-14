@@ -11,7 +11,7 @@
 ```sh
 mvn clear
 mvn package
-java -jar target\testcase-0.0.1-SNAPSHOT.jar
+java -jar target/testcase-0.0.1-SNAPSHOT.jar
 ```
 ## Реализованные задачи
 - CRUD по товарам
