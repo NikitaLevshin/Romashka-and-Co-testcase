@@ -1,7 +1,7 @@
 # RomashkaCo
 ![RomashkaCo](https://i.postimg.cc/3Jr5CTDS/Frame-2.png)
 
-Четвертое задание по реализации REST-API 
+Пятое задание по реализации REST-API 
 
 Использованный стек: **Java 17, Spring-boot, PostgreSQL, Hibernate, Junit, maven, Docker**
 
