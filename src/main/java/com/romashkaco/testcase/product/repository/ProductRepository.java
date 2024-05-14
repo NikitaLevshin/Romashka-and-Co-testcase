@@ -4,10 +4,13 @@ import com.romashkaco.testcase.product.model.Product;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
+@Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT p FROM Product p WHERE ((lower(p.name) LIKE concat('%',lower(:name),'%') OR :name IS NULL)) " +
@@ -23,5 +26,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "AND (p.price <= (:priceLess) AND p.price >= (:priceMore))")
     List<Product> getAllWithFiltersAndSortBothPrices(String name, Double priceMore, Double priceLess,
                                                      Boolean onlyAvailable, Pageable pageable);
+
+    Optional<Product> findByName(String name);
 
 }

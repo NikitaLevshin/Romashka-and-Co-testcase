@@ -37,19 +37,20 @@ public class ProductServiceTest {
     @BeforeEach
     void setUp() {
         productService = new ProductServiceImpl(productRepository);
-        goodHammer = new Product("Молоток", "Хороший молоток", 10, true);
-        badHammer = new Product("Молоток", "Плохой молоток", 5, false);
-        goodScrewdriver = new Product("Отвёртка", "Хорошая отвертка", 20, true);
-        badScrewdriver = new Product("Отвёртка", "Плохая отвертка", 15.15, false);
-        goodJackHammer = new Product("Отбойный молоток", "Хороший отбойный молоток", 50, true);
-        badJackHammer = new Product("Отбойный молоток", "Плохой отбойный молоток", 40, false);
+        goodHammer = new Product("Молоток модель 1", "Хороший молоток", 10, true, 1);
+        badHammer = new Product("Молоток модель 2", "Плохой молоток", 5, false, 0);
+        goodScrewdriver = new Product("Отвёртка модель 1", "Хорошая отвертка", 20, true);
+        badScrewdriver = new Product("Отвёртка модель 2", "Плохая отвертка", 15.15, false);
+        goodJackHammer = new Product("Отбойный молоток модель 1", "Хороший отбойный молоток", 50, true);
+        badJackHammer = new Product("Отбойный молоток модель 2", "Плохой отбойный молоток", 40, false);
     }
 
     @Test
     void saveTest() {
         Product testProduct = productRepository.save(goodHammer);
-        assertEquals(1, testProduct.getId());
         assertEquals(goodHammer.getName(), testProduct.getName());
+        assertEquals(goodHammer.getDescription(), testProduct.getDescription());
+        assertTrue(testProduct.getId() != 0);
     }
 
     @Test
@@ -276,5 +277,16 @@ public class ProductServiceTest {
                 }
         );
         assertEquals("Неверно задан фильтр названия", e.getMessage());
+    }
+
+    @Test
+    void onStockIsAutomaticallyChangingByAmount() {
+        Product product = new Product("name", null, 12, false, 5);
+        ProductDto productDto = productService.create(ProductMapper.toProductDto(product));
+        assertTrue(productDto.getIsOnStock());
+
+        Product product1 = new Product("name1", null, 15, true, 0);
+        ProductDto productDto1 = productService.create(ProductMapper.toProductDto(product1));
+        assertFalse(productDto1.getIsOnStock());
     }
 }

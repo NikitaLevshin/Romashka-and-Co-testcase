@@ -15,7 +15,8 @@ public class ProductMapper {
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),
-                productDto.getIsOnStock() != null && productDto.getIsOnStock()
+                productDto.getIsOnStock() != null && productDto.getIsOnStock(),
+                productDto.getAmount()
         );
     }
 
@@ -24,7 +25,8 @@ public class ProductMapper {
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
-                product.isOnStock());
+                product.isOnStock(),
+                product.getAmount());
     }
 
     public static List<ProductDto> toProductDtoList(List<Product> productList) {

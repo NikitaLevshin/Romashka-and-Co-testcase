@@ -13,12 +13,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
@@ -59,13 +61,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDto create(ProductDto productDto) {
         log.info("Создаем новый товар");
         Product product = ProductMapper.fromProductDto(productDto);
+        product.setOnStock(stockAvailableCalculator(product));
         return ProductMapper.toProductDto(productRepository.save(product));
     }
 
     @Override
+    @Transactional
     public ProductDto upgrade(int id, ProductDto productDto) {
         log.info("Обновляем товар с id {}", id);
         Product product = ProductMapper.fromProductDto(getById(id));
@@ -78,14 +83,14 @@ public class ProductServiceImpl implements ProductService {
         if (productDto.getPrice() != 0) {
             product.setPrice(productDto.getPrice());
         }
-        if (productDto.getIsOnStock() != null) {
-            product.setOnStock((productDto.getIsOnStock()));
-        }
+        product.setOnStock(stockAvailableCalculator
+                (ProductMapper.fromProductDto(productDto)));
         productRepository.findById(id).orElseThrow(() -> new NotFoundException("Товар с этим id не найден"));
         return ProductMapper.toProductDto(productRepository.save(product));
     }
 
     @Override
+    @Transactional
     public void delete(int id) {
         log.info("Удаляем товар с id {}", id);
         productRepository.findById(id).orElseThrow(() -> new NotFoundException("Товар с этим id не найден"));
@@ -101,5 +106,16 @@ public class ProductServiceImpl implements ProductService {
         }
         if (priceMore != null && priceMore < 0) throw new ValidationException("Цена не может быть отрицательной");
         if (priceLess != null && priceLess < 0) throw new ValidationException("Цена не может быть отрицательной");
+    }
+
+    private Boolean stockAvailableCalculator(Product product) {
+        if (!product.isOnStock() && product.getAmount() > 0) {
+            return true;
+        }
+        if (product.isOnStock() && product.getAmount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

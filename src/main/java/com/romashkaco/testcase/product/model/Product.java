@@ -27,6 +27,8 @@ public class Product {
     private double price;
     @Column(name = "on_stock")
     private boolean isOnStock;
+    @Min(value = 0, message = "Количество товара не может быть отрицательным")
+    private int amount;
 
 
     public Product(String name, String description, double price, boolean isOnStock) {
@@ -36,4 +38,11 @@ public class Product {
         this.isOnStock = isOnStock;
     }
 
+    public Product(String name, String description, double price, boolean isOnStock, Integer amount) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.isOnStock = isOnStock;
+        this.amount = amount;
+    }
 }

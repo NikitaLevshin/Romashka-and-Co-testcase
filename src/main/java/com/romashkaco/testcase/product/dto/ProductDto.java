@@ -18,4 +18,5 @@ public class ProductDto {
     private String description;
     private double price;
     private Boolean isOnStock;
+    private int amount;
 }

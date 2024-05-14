@@ -36,7 +36,7 @@ public class ProductControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private MockMvc mvc;
     private final ProductDto productDto = new ProductDto(
-            1, "Молоток", "Хороший молоток", 122.99, true);
+            1, "Молоток", "Хороший молоток", 122.99, true, 1);
 
     @BeforeEach
     void setUp() {
