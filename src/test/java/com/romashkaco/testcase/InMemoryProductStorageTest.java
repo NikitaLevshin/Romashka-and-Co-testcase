@@ -54,7 +54,7 @@ public class InMemoryProductStorageTest {
         assertEquals(upgradedProduct.getName(), upgradedProduct1.getName());
         assertEquals(upgradedProduct.getDescription(), upgradedProduct1.getDescription());
         assertEquals(upgradedProduct.getPrice(), upgradedProduct1.getPrice());
-        assertEquals(upgradedProduct.isOnStock(), upgradedProduct1.isOnStock());
+        assertEquals(upgradedProduct.getIsOnStock(), upgradedProduct1.getIsOnStock());
     }
 
     @Test
