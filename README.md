@@ -18,7 +18,7 @@ docker-compose up
 - Пользователь может ограничивать количество выданных записей о товарах
 - Написаны JUnit тесты на фильтрацию и сортировку
 
-[Документация по новому API начинается здесь](https://github.com/NikitaLevshin/Romashka-and-Co-testcase/new/t4?filename=README.md#получение-всех-товаров-используя-фильтрацию-и-сортировку)
+[Документация по новому API начинается здесь](https://github.com/NikitaLevshin/Romashka-and-Co-testcase/tree/t4?tab=readme-ov-file#получение-всех-товаров-используя-фильтрацию-и-сортировку)
 
 ## API Reference
 #### Получение всех товаров
