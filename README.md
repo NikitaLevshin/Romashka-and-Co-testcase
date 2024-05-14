@@ -16,7 +16,7 @@ REST-API для компании "РомашкаКо".
 - Добавлен dockerfile и docker-compose для запуска приложения на любой ОС
 
 ## [Ветка t4](https://github.com/NikitaLevshin/Romashka-and-Co-testcase/tree/t4)
-- Добавлены фильтрация и сортировка через параметр запуска
+- Добавлены фильтрация и сортировка через параметры запроса
 
 ## [Ветка t5](https://github.com/NikitaLevshin/Romashka-and-Co-testcase/tree/t5)
 - Добавлены новые CRUD для поставки и продажи товаров
