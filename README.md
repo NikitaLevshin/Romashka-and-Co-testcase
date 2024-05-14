@@ -19,7 +19,7 @@ docker-compose up
 ## API Reference
 #### Получение всех товаров
 ```
-GET /product/
+GET /product
 ```
 #### Получение товара по его id
 ```
